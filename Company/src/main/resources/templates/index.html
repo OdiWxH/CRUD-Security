@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+       <title>All Trainers</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">   
+    </head>
+    <body>
+        <div class="container my-2">
+        <div class="card">
+            <div class="card-body">
+                <div th:switch="${suppliers}" class="container my-5">
+                    <p class="my-5">
+                        <a href="/suppliers/signup" class="btn btn-primary"><i
+       class="fas fa-user-plus ml-2"> Add Supplier</i></a>
+                    </p>
+                    <div class="col-md-10">
+                        <h2 th:case="null">No Suppliers yet!</h2>
+                        <div th:case="*">
+                            <table class="table table-striped table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th>Company Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>VAT Number</th>
+                                        <th>IRS Office</th>
+                                        <th>Address</th>
+                                        <th>ZIP Code</th>
+                                        <th>City</th>
+                                        <th>Country</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="supplier : ${suppliers}">
+                                        <td th:text="${supplier.companyName}"></td>
+                                        <td th:text="${supplier.firstName}"></td>
+                                        <td th:text="${supplier.lastName}"></td>
+                                        <td th:text="${supplier.vat}"></td>
+                                        <td th:text="${supplier.irs}"></td>
+                                        <td th:text="${supplier.address}"></td>
+                                        <td th:text="${supplier.zip}"></td>
+                                        <td th:text="${supplier.city}"></td>
+                                        <td th:text="${supplier.country}"></td>
+                                        <td><a th:href="@{/suppliers/edit/{id}(id=${supplier.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                        <td><a th:href="@{/suppliers/delete/{id}(id=${supplier.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
+
